@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+.env.*
+
+# Secrets and local configuration
+*.pem
+*.key
+
+# OS/editor
+.DS_Store
+.vscode/

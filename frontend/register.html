@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account – DataSip</title>
+  <meta name="description" content="Create your DataSip account and start your AI-powered personalized learning journey today." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<div class="auth-page">
+  <!-- Visual Side -->
+  <div class="auth-visual">
+    <div style="position:absolute;top:10%;left:10%;width:300px;height:300px;background:radial-gradient(circle,rgba(14,165,233,0.2) 0%,transparent 70%);"></div>
+    <div style="position:absolute;bottom:10%;right:10%;width:200px;height:200px;background:radial-gradient(circle,rgba(139,92,246,0.2) 0%,transparent 70%);"></div>
+
+    <div style="position:relative;z-index:1;text-align:center;max-width:400px;">
+      <div style="font-size:4rem;margin-bottom:1rem;">💧</div>
+      <h1 style="color:white;margin-bottom:1rem;">Start your learning journey</h1>
+      <p style="color:rgba(255,255,255,0.65);">DataSip personalizes your education with AI — tell us about yourself and we'll adapt everything to your unique needs.</p>
+
+      <div style="margin-top:2rem;display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+        <div class="card-glass" style="text-align:center;">
+          <div style="font-size:1.5rem;">🎯</div>
+          <p style="color:rgba(255,255,255,0.8);font-size:0.8rem;margin:0.25rem 0 0;font-weight:600;">Goal-Based</p>
+        </div>
+        <div class="card-glass" style="text-align:center;">
+          <div style="font-size:1.5rem;">📊</div>
+          <p style="color:rgba(255,255,255,0.8);font-size:0.8rem;margin:0.25rem 0 0;font-weight:600;">Analytics</p>
+        </div>
+        <div class="card-glass" style="text-align:center;">
+          <div style="font-size:1.5rem;">🤖</div>
+          <p style="color:rgba(255,255,255,0.8);font-size:0.8rem;margin:0.25rem 0 0;font-weight:600;">AI Tutor</p>
+        </div>
+        <div class="card-glass" style="text-align:center;">
+          <div style="font-size:1.5rem;">🗺️</div>
+          <p style="color:rgba(255,255,255,0.8);font-size:0.8rem;margin:0.25rem 0 0;font-weight:600;">Roadmaps</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Side -->
+  <div class="auth-form-side" style="overflow-y:auto;max-height:100vh;">
+    <div class="auth-form-container" style="padding:2rem 0;">
+      <a href="/" class="navbar-brand" style="display:inline-flex;margin-bottom:1.5rem;font-size:1.3rem;">
+        <div class="logo-icon" style="width:30px;height:30px;">💧</div>
+        Data<span>Sip</span>
+      </a>
+
+      <h2>Create your account</h2>
+      <p>Already have one? <a href="/login.html">Sign in</a></p>
+
+      <form class="auth-form" id="register-form" style="margin-top:1.5rem;">
+        <!-- Basic Info -->
+        <div style="font-size:0.8rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem;">Basic Info</div>
+
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name</label>
+          <input class="form-input" type="text" id="name" placeholder="Alex Johnson" required autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+
+        <div class="grid grid-2" style="gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-input" type="password" id="password" placeholder="Min 6 chars" required autocomplete="new-password" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="confirm_password">Confirm Password</label>
+            <input class="form-input" type="password" id="confirm_password" placeholder="Repeat password" required />
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Learning Profile -->
+        <div style="font-size:0.8rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem;">Learning Profile</div>
+
+        <div class="grid grid-2" style="gap:0.75rem;">
+          <div class="form-group">
+            <label class="form-label" for="education_level">Education Level</label>
+            <select class="form-select" id="education_level">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate" selected>Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="learning_style">Learning Style</label>
+            <select class="form-select" id="learning_style">
+              <option value="reading" selected>Reading / Theory</option>
+              <option value="visual">Visual / Diagrams</option>
+              <option value="practice">Practice / Hands-on</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="interests">Interests <span style="color:var(--text-muted);">(comma-separated)</span></label>
+          <input class="form-input" type="text" id="interests" placeholder="Python, Machine Learning, Web Development" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="goal">Learning Goal</label>
+          <textarea class="form-textarea" id="goal" placeholder="e.g. Become a full-stack developer, Pass the AWS certification, Learn data science..." style="min-height:80px;"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top:0.5rem;">
+          🚀 Create Account
+        </button>
+
+        <p style="font-size:0.78rem;text-align:center;margin-top:0.75rem;">
+          By creating an account, you agree to our terms of service.
+        </p>
+      </form>
+
+      <div style="margin-top:1rem;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Theme</span>
+        <button class="theme-toggle" id="theme-btn">☀️</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+</body>
+</html>

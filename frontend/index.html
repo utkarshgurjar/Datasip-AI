@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataSip – AI Powered Personalized Learning</title>
+  <meta name="description" content="DataSip is an adaptive learning platform powered by Google Gemini AI. Chat with an AI tutor, generate quizzes, and get personalized learning paths." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <div class="logo-icon">💧</div>
+    Data<span>Sip</span>
+  </a>
+  <ul class="navbar-nav">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How it Works</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <button class="theme-toggle" id="theme-btn" title="Toggle theme">☀️</button>
+    <a href="/login.html" class="btn btn-ghost btn-sm">Sign In</a>
+    <a href="/register.html" class="btn btn-primary btn-sm">Get Started Free</a>
+  </div>
+</nav>
+
+<!-- ── Hero ──────────────────────────────────────────────────────── -->
+<section class="hero" style="padding-top:64px;">
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">
+        ✨ Powered by Google Gemini AI
+      </div>
+      <h1>
+        Learn Smarter with
+        <span class="gradient-text">AI-Powered</span>
+        Personalized Education
+      </h1>
+      <p>
+        DataSip adapts to your unique learning style, generates quizzes on any topic,
+        and builds custom learning paths — all powered by cutting-edge AI.
+      </p>
+      <div class="hero-actions">
+        <a href="/register.html" class="btn btn-primary btn-lg" id="hero-cta">
+          🚀 Start Learning Free
+        </a>
+        <a href="/login.html" class="btn btn-ghost btn-lg">
+          Sign In
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hero-preview-card">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#0ea5e9);display:flex;align-items:center;justify-content:center;">🤖</div>
+            <span style="color:#94a3b8;font-size:0.85rem;">AI Tutor</span>
+          </div>
+          <p style="color:#e2e8f0;font-size:0.9rem;line-height:1.5;">Machine learning is a subset of AI where systems learn from data to improve performance without explicit programming...</p>
+        </div>
+
+        <div class="hero-preview-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+            <span style="color:#0ea5e9;font-size:0.8rem;font-weight:700;">QUIZ · Python · Intermediate</span>
+            <span style="color:#94a3b8;font-size:0.8rem;">3/5</span>
+          </div>
+          <p style="color:#e2e8f0;font-size:0.85rem;margin-bottom:0.75rem;">What is the output of <code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;">len([1,2,3])</code>?</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);color:#34d399;padding:4px 12px;border-radius:20px;font-size:0.8rem;">3 ✓</span>
+            <span style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#94a3b8;padding:4px 12px;border-radius:20px;font-size:0.8rem;">2</span>
+          </div>
+        </div>
+
+        <div class="hero-preview-card">
+          <div style="color:#0ea5e9;font-size:0.8rem;font-weight:700;margin-bottom:0.5rem;">🗺️ YOUR LEARNING PATH</div>
+          <div style="color:#e2e8f0;font-size:0.85rem;margin-bottom:0.5rem;font-weight:600;">Python Fundamentals → Data Structures → Algorithms</div>
+          <div style="background:rgba(255,255,255,0.05);border-radius:20px;height:6px;overflow:hidden;">
+            <div style="width:35%;height:100%;background:linear-gradient(90deg,#0ea5e9,#06b6d4);border-radius:20px;"></div>
+          </div>
+          <div style="color:#94a3b8;font-size:0.75rem;margin-top:4px;">2 of 6 modules complete</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Features ───────────────────────────────────────────────────── -->
+<section id="features" class="features-section">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything you need to <span style="color:var(--primary)">master any topic</span></h2>
+  <p class="section-subtitle">DataSip combines the latest AI with proven learning science to accelerate your education.</p>
+
+  <div class="grid grid-3">
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <h3>AI Tutor Chat</h3>
+      <p>Chat with Gemini AI, ask questions at any depth, and get explanations tailored to your learning level and style.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+      <h3>Smart Quiz Generator</h3>
+      <p>Generate MCQ or True/False quizzes on any topic with adjustable difficulty. Auto-graded with detailed explanations.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗺️</div>
+      <h3>Personalized Learning Paths</h3>
+      <p>AI builds a custom roadmap from your goal, education level, and weak areas with estimated time and curated resources.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Progress Analytics</h3>
+      <p>Track your score trends, topic mastery, and learning streak with beautiful Chart.js visualizations.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Adaptive Difficulty</h3>
+      <p>DataSip automatically suggests harder or easier quizzes based on your recent performance in each topic.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌙</div>
+      <h3>Dark Mode & More</h3>
+      <p>Comfortable dark/light mode, markdown rendering in chat, code syntax highlighting, and mobile-friendly design.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── How It Works ───────────────────────────────────────────────── -->
+<section id="how-it-works" style="padding:4rem 2rem;background:var(--bg-secondary);">
+  <div style="max-width:800px;margin:0 auto;text-align:center;">
+    <div class="section-label">How It Works</div>
+    <h2 style="margin-bottom:3rem;">Get started in <span style="color:var(--primary)">3 simple steps</span></h2>
+
+    <div style="display:flex;gap:2rem;text-align:left;flex-direction:column;">
+      <div style="display:flex;gap:1.5rem;align-items:flex-start;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--gradient-primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0;">1</div>
+        <div>
+          <h4 style="margin-bottom:0.5rem;">Create your profile</h4>
+          <p>Tell us your education level, interests, learning style, and goal. DataSip personalizes everything to you.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:1.5rem;align-items:flex-start;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--gradient-primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0;">2</div>
+        <div>
+          <h4 style="margin-bottom:0.5rem;">Learn & quiz yourself</h4>
+          <p>Chat with the AI tutor, generate quizzes on any topic, and track which areas need more attention.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:1.5rem;align-items:flex-start;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--gradient-primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0;">3</div>
+        <div>
+          <h4 style="margin-bottom:0.5rem;">Follow your roadmap</h4>
+          <p>Get an AI-generated personalized learning path with modules, resources, and milestones to reach your goal.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ─────────────────────────────────────────────────────────── -->
+<section style="padding:5rem 2rem;text-align:center;background:var(--gradient-hero);">
+  <h2 style="color:white;margin-bottom:1rem;">Ready to level up your learning?</h2>
+  <p style="color:rgba(255,255,255,0.65);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto;">Join DataSip today and experience AI-powered learning that actually adapts to you.</p>
+  <a href="/register.html" class="btn btn-primary btn-lg" id="bottom-cta">🚀 Get Started Free</a>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────────────────── -->
+<footer style="padding:2rem;text-align:center;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.875rem;">
+  <p>💧 DataSip — AI Powered Personalized Learning · Built with FastAPI + Gemini AI</p>
+</footer>
+
+<div id="toast-container"></div>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+</body>
+</html>

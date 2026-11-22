@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Generator – DataSip</title>
+  <meta name="description" content="Generate AI-powered quizzes on any topic. Test your knowledge with MCQ or True/False questions at any difficulty level." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <div class="logo-icon">💧</div>
+    Data<span>Sip</span>
+  </a>
+  <ul class="navbar-nav">
+    <li><a href="/dashboard.html">Dashboard</a></li>
+    <li><a href="/chat.html">AI Tutor</a></li>
+    <li><a href="/quiz.html" class="active">Quizzes</a></li>
+    <li><a href="/learning-path.html">Learning Path</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <button class="theme-toggle" id="theme-btn">☀️</button>
+    <span style="font-size:0.875rem;color:var(--text-secondary);" id="navbar-user-name"></span>
+    <button class="btn btn-ghost btn-sm" data-action="logout">Sign Out</button>
+  </div>
+</nav>
+
+<div class="app-layout">
+  <aside class="sidebar">
+    <a href="/dashboard.html" class="chat-session-item">📊 Dashboard</a>
+    <a href="/chat.html" class="chat-session-item">🤖 AI Tutor Chat</a>
+    <a href="/quiz.html" class="chat-session-item active">📝 Quiz Generator</a>
+    <a href="/learning-path.html" class="chat-session-item">🗺️ Learning Path</a>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header">
+      <h1 class="page-title">📝 Quiz Generator</h1>
+      <p class="page-subtitle">Generate AI-powered quizzes on any topic at any difficulty</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:2rem;align-items:start;">
+
+      <!-- Quiz Area -->
+      <div>
+        <!-- Setup Form -->
+        <div id="quiz-setup">
+          <div class="card" style="margin-bottom:1.5rem;">
+            <h3 style="margin-bottom:1.25rem;">Generate a New Quiz</h3>
+
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+              <div class="form-group">
+                <label class="form-label" for="quiz-topic">Topic</label>
+                <input
+                  class="form-input"
+                  type="text"
+                  id="quiz-topic"
+                  placeholder="e.g. Machine Learning, Python, World History, Calculus..."
+                />
+              </div>
+
+              <div class="grid grid-3" style="gap:0.75rem;">
+                <div class="form-group">
+                  <label class="form-label" for="quiz-difficulty">Difficulty</label>
+                  <select class="form-select" id="quiz-difficulty">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate" selected>Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="quiz-num">Questions</label>
+                  <select class="form-select" id="quiz-num">
+                    <option value="3">3 questions</option>
+                    <option value="5" selected>5 questions</option>
+                    <option value="8">8 questions</option>
+                    <option value="10">10 questions</option>
+                    <option value="15">15 questions</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="quiz-type">Type</label>
+                  <select class="form-select" id="quiz-type">
+                    <option value="mcq" selected>Multiple Choice</option>
+                    <option value="true_false">True / False</option>
+                    <option value="mixed">Mixed</option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-full" id="generate-btn" style="margin-top:0.5rem;">
+                ✨ Generate Quiz with AI
+              </button>
+            </div>
+          </div>
+
+          <!-- Tips -->
+          <div class="card" style="background:rgba(14,165,233,0.05);border-color:rgba(14,165,233,0.2);">
+            <h4 style="color:var(--primary);margin-bottom:0.75rem;">💡 Tips for great quizzes</h4>
+            <ul style="color:var(--text-secondary);font-size:0.875rem;padding-left:1.25rem;line-height:2;">
+              <li>Be specific: "Python list comprehensions" beats "Python"</li>
+              <li>Match difficulty to your current skill level</li>
+              <li>Try "Advanced" on topics you think you've mastered</li>
+              <li>Use True/False for quick knowledge checks</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Active Quiz -->
+        <div id="quiz-active" class="hidden quiz-container">
+          <!-- Progress Header -->
+          <div class="quiz-progress-header">
+            <div class="quiz-meta">
+              <span id="quiz-topic-display" class="badge badge-blue"></span>
+              <span id="quiz-difficulty-display" class="badge badge-purple"></span>
+              <div class="quiz-timer" id="quiz-timer">
+                ⏱ <span id="timer-display">00:00</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:0.5rem;">
+              <div style="flex:1;">
+                <div class="progress-bar">
+                  <div class="progress-fill" id="question-progress" style="width:0%;"></div>
+                </div>
+              </div>
+              <span id="question-counter" style="font-size:0.85rem;color:var(--text-muted);font-weight:600;white-space:nowrap;"></span>
+            </div>
+          </div>
+
+          <!-- Question Card -->
+          <div class="question-card">
+            <div class="question-number" id="question-number">Question 1</div>
+            <div class="question-text" id="question-text"></div>
+            <div class="options-list" id="options-container"></div>
+          </div>
+
+          <!-- Navigation -->
+          <div style="display:flex;gap:1rem;margin-top:1.5rem;justify-content:space-between;">
+            <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+            <div style="display:flex;gap:0.75rem;">
+              <button class="btn btn-primary" id="next-btn">Next →</button>
+              <button class="btn btn-primary hidden" id="submit-btn" style="background:var(--gradient-accent);">
+                ✓ Submit Quiz
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="quiz-result" class="hidden quiz-container">
+          <div class="card" style="text-align:center;padding:2.5rem;">
+            <h2 style="margin-bottom:1.5rem;">Quiz Complete! 🎉</h2>
+
+            <!-- Score Ring -->
+            <div id="score-ring" style="width:160px;height:160px;border-radius:50%;margin:0 auto 2rem;display:flex;align-items:center;justify-content:center;"></div>
+
+            <p id="result-message" style="font-size:1rem;margin-bottom:1.5rem;font-weight:500;"></p>
+
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
+              <div style="background:var(--bg-secondary);border-radius:var(--radius);padding:1rem;">
+                <div style="font-size:1.25rem;font-weight:800;color:var(--text);" id="result-correct"></div>
+                <div style="font-size:0.8rem;color:var(--text-muted);">Correct</div>
+              </div>
+              <div style="background:var(--bg-secondary);border-radius:var(--radius);padding:1rem;">
+                <div style="font-size:1.25rem;font-weight:800;color:var(--text);" id="result-time"></div>
+                <div style="font-size:0.8rem;color:var(--text-muted);">Time Taken</div>
+              </div>
+              <div style="background:var(--bg-secondary);border-radius:var(--radius);padding:1rem;overflow:hidden;">
+                <div style="font-size:0.9rem;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="result-topic"></div>
+                <div style="font-size:0.8rem;color:var(--text-muted);">Topic</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:1rem;justify-content:center;margin-bottom:2rem;">
+              <button class="btn btn-primary" id="new-quiz-btn">📝 New Quiz</button>
+              <a href="/learning-path.html" class="btn btn-secondary">🗺️ View Learning Path</a>
+            </div>
+          </div>
+
+          <!-- Per-Question Breakdown -->
+          <h3 style="margin-bottom:1rem;">Question Breakdown</h3>
+          <div id="questions-breakdown"></div>
+        </div>
+      </div>
+
+      <!-- Sidebar: History -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">Recent Quizzes</span>
+            <a href="/dashboard.html" style="font-size:0.8rem;color:var(--primary);">All →</a>
+          </div>
+          <div id="quiz-history">
+            <div style="color:var(--text-muted);font-size:0.85rem;">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container"></div>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/quiz.js"></script>
+</body>
+</html>

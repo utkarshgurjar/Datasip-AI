@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Path – DataSip</title>
+  <meta name="description" content="Your personalized AI-generated learning roadmap. Follow step-by-step modules tailored to your goals and skill level." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <div class="logo-icon">💧</div>
+    Data<span>Sip</span>
+  </a>
+  <ul class="navbar-nav">
+    <li><a href="/dashboard.html">Dashboard</a></li>
+    <li><a href="/chat.html">AI Tutor</a></li>
+    <li><a href="/quiz.html">Quizzes</a></li>
+    <li><a href="/learning-path.html" class="active">Learning Path</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <button class="theme-toggle" id="theme-btn">☀️</button>
+    <span style="font-size:0.875rem;color:var(--text-secondary);" id="navbar-user-name"></span>
+    <button class="btn btn-ghost btn-sm" data-action="logout">Sign Out</button>
+  </div>
+</nav>
+
+<div class="app-layout">
+  <aside class="sidebar">
+    <a href="/dashboard.html" class="chat-session-item">📊 Dashboard</a>
+    <a href="/chat.html" class="chat-session-item">🤖 AI Tutor Chat</a>
+    <a href="/quiz.html" class="chat-session-item">📝 Quiz Generator</a>
+    <a href="/learning-path.html" class="chat-session-item active">🗺️ Learning Path</a>
+  </aside>
+
+  <main class="main-content">
+    <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <div>
+        <h1 class="page-title">🗺️ Learning Path</h1>
+        <p class="page-subtitle">Your personalized AI-generated roadmap to reach your goal</p>
+      </div>
+      <button class="btn btn-secondary" id="regen-btn">🔄 Regenerate Path</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:2rem;align-items:start;">
+
+      <!-- Main: Path -->
+      <div>
+        <!-- Loading Spinner -->
+        <div id="path-loading" class="card" style="text-align:center;padding:3rem;">
+          <div class="spinner spinner-primary" style="width:40px;height:40px;border-width:3px;margin:0 auto 1rem;"></div>
+          <p style="color:var(--text-secondary);">Loading your learning path...</p>
+        </div>
+
+        <!-- Empty State: No path yet -->
+        <div id="path-empty" class="hidden">
+          <div class="card" style="text-align:center;padding:3rem;">
+            <div style="font-size:4rem;margin-bottom:1rem;">🗺️</div>
+            <h3 style="margin-bottom:0.75rem;">No learning path yet</h3>
+            <p style="color:var(--text-secondary);margin-bottom:2rem;">Generate a personalized AI roadmap to reach your learning goal.</p>
+
+            <div style="max-width:400px;margin:0 auto;">
+              <div class="form-group" style="margin-bottom:1rem;text-align:left;">
+                <label class="form-label" for="path-goal-input">Your Learning Goal (optional)</label>
+                <textarea
+                  class="form-textarea"
+                  id="path-goal-input"
+                  placeholder="e.g. Become a full-stack developer, Pass AWS Solutions Architect exam, Learn Data Science..."
+                  style="min-height:80px;"
+                ></textarea>
+                <p style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">Leave blank to use your profile goal</p>
+              </div>
+              <button class="btn btn-primary btn-full" id="generate-path-btn">
+                ✨ Generate Learning Path
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Path Container -->
+        <div id="path-container" class="hidden">
+          <!-- Path Header -->
+          <div class="card" style="margin-bottom:2rem;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:0.8rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">GOAL</div>
+                <h3 id="path-goal" style="font-size:1.1rem;"></h3>
+              </div>
+              <div style="text-align:right;">
+                <div id="stat-path-progress" style="font-size:1.5rem;font-weight:800;color:var(--primary);" id="path-progress-pct">0%</div>
+                <div style="font-size:0.8rem;color:var(--text-muted);" id="path-stats"></div>
+              </div>
+            </div>
+            <div class="progress-bar" style="height:10px;">
+              <div class="progress-fill" id="path-progress-bar" style="width:0%;"></div>
+            </div>
+
+            <div style="margin-top:1rem;">
+              <div class="form-group">
+                <label class="form-label" for="path-goal-input">Update Goal & Regenerate</label>
+                <div style="display:flex;gap:0.75rem;">
+                  <input class="form-input" type="text" id="path-goal-input" placeholder="New learning goal..." style="flex:1;" />
+                  <button class="btn btn-primary" id="generate-path-btn">✨ Regenerate</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Steps -->
+          <div id="steps-container"></div>
+        </div>
+      </div>
+
+      <!-- Sidebar: Recommendations -->
+      <div>
+        <div class="card" style="margin-bottom:1rem;">
+          <h4 style="margin-bottom:1rem;">🤖 AI Recommendations</h4>
+          <div id="recommendations">
+            <div style="color:var(--text-muted);font-size:0.875rem;">Loading...</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="margin-bottom:1rem;">⚡ Quick Actions</h4>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <a href="/quiz.html" class="btn btn-secondary btn-sm">📝 Take a Quiz</a>
+            <a href="/chat.html" class="btn btn-secondary btn-sm">🤖 Chat with AI</a>
+            <a href="/dashboard.html" class="btn btn-secondary btn-sm">📊 View Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container"></div>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/learning.js"></script>
+</body>
+</html>

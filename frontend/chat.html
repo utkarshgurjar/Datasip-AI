@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tutor Chat – DataSip</title>
+  <meta name="description" content="Chat with your DataSip AI tutor. Get personalized explanations on any topic at your level." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <!-- Markdown + Syntax Highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <div class="logo-icon">💧</div>
+    Data<span>Sip</span>
+  </a>
+  <ul class="navbar-nav">
+    <li><a href="/dashboard.html">Dashboard</a></li>
+    <li><a href="/chat.html" class="active">AI Tutor</a></li>
+    <li><a href="/quiz.html">Quizzes</a></li>
+    <li><a href="/learning-path.html">Learning Path</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <button class="theme-toggle" id="theme-btn">☀️</button>
+    <span style="font-size:0.875rem;color:var(--text-secondary);" id="navbar-user-name"></span>
+    <button class="btn btn-ghost btn-sm" data-action="logout">Sign Out</button>
+  </div>
+</nav>
+
+<!-- ── Chat Layout ──────────────────────────────────────────────── -->
+<div style="padding-top:64px;height:100vh;display:flex;">
+
+  <!-- Sessions Sidebar -->
+  <div class="chat-sidebar">
+    <div class="chat-sidebar-header">
+      <span style="font-weight:700;font-size:0.95rem;">Conversations</span>
+      <button class="btn btn-primary btn-sm" id="new-chat-btn">+ New</button>
+    </div>
+    <div class="chat-sessions-list" id="sessions-list">
+      <div style="text-align:center;padding:2rem 1rem;color:var(--text-muted);font-size:0.85rem;">Loading...</div>
+    </div>
+  </div>
+
+  <!-- Chat Main -->
+  <div class="chat-main">
+    <!-- Chat Header -->
+    <div style="padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <h2 style="font-size:1rem;font-weight:700;">AI Tutor</h2>
+        <p style="font-size:0.8rem;color:var(--text-muted);">Powered by Gemini · Adapts to your level</p>
+      </div>
+      <div style="display:flex;gap:0.5rem;">
+        <a href="/quiz.html" class="btn btn-secondary btn-sm">📝 Take Quiz</a>
+        <button class="theme-toggle" style="width:36px;height:36px;">☀️</button>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="chat-messages" id="chat-messages"></div>
+
+    <!-- Input Area -->
+    <div class="chat-input-area">
+      <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.5rem;">Press Enter to send · Shift+Enter for new line</div>
+      <div class="chat-input-container">
+        <textarea
+          class="chat-input"
+          id="chat-input"
+          placeholder="Ask me anything... e.g. 'Explain neural networks like I'm a beginner'"
+          rows="1"
+        ></textarea>
+        <button class="btn-send" id="send-btn" title="Send message">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/chat.js"></script>
+</body>
+</html>

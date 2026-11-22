@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In – DataSip</title>
+  <meta name="description" content="Sign in to your DataSip account and continue your AI-powered learning journey." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<div class="auth-page">
+  <!-- Visual Side -->
+  <div class="auth-visual">
+    <!-- Decorative background blobs -->
+    <div style="position:absolute;top:10%;left:10%;width:300px;height:300px;background:radial-gradient(circle,rgba(14,165,233,0.2) 0%,transparent 70%);"></div>
+    <div style="position:absolute;bottom:10%;right:10%;width:200px;height:200px;background:radial-gradient(circle,rgba(139,92,246,0.2) 0%,transparent 70%);"></div>
+
+    <div style="position:relative;z-index:1;text-align:center;max-width:400px;">
+      <div style="font-size:4rem;margin-bottom:1rem;">💧</div>
+      <h1 style="color:white;margin-bottom:1rem;">Welcome back to DataSip</h1>
+      <p style="color:rgba(255,255,255,0.65);">Your AI-powered learning companion. Continue mastering new skills with personalized guidance.</p>
+
+      <div style="margin-top:2rem;display:flex;flex-direction:column;gap:0.75rem;">
+        <div class="card-glass" style="text-align:left;">
+          <div style="color:#0ea5e9;font-weight:700;font-size:0.85rem;margin-bottom:0.25rem;">🤖 AI Tutor</div>
+          <p style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin:0;">Get instant, adaptive explanations on any topic</p>
+        </div>
+        <div class="card-glass" style="text-align:left;">
+          <div style="color:#0ea5e9;font-weight:700;font-size:0.85rem;margin-bottom:0.25rem;">📝 Smart Quizzes</div>
+          <p style="color:rgba(255,255,255,0.7);font-size:0.85rem;margin:0;">Test your knowledge with AI-generated quizzes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Side -->
+  <div class="auth-form-side">
+    <div class="auth-form-container">
+      <a href="/" class="navbar-brand" style="display:inline-flex;margin-bottom:2rem;font-size:1.3rem;">
+        <div class="logo-icon" style="width:30px;height:30px;">💧</div>
+        Data<span>Sip</span>
+      </a>
+
+      <h2>Sign in to your account</h2>
+      <p>Don't have an account? <a href="/register.html">Create one free</a></p>
+
+      <form class="auth-form" id="login-form" style="margin-top:1.5rem;">
+        <div class="form-group">
+          <label class="form-label" for="email">Email address</label>
+          <input
+            class="form-input"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input
+            class="form-input"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            required
+            autocomplete="current-password"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top:0.5rem;">
+          Sign In
+        </button>
+      </form>
+
+      <div class="divider" style="margin:1.5rem 0;"></div>
+
+      <div style="background:var(--bg-secondary);border-radius:var(--radius);padding:1rem;border:1px solid var(--border);">
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem;font-weight:600;">Demo Account</p>
+        <p style="font-size:0.85rem;color:var(--text-secondary);">Email: <strong>demo@datasip.ai</strong></p>
+        <p style="font-size:0.85rem;color:var(--text-secondary);">Password: <strong>demo1234</strong></p>
+        <button class="btn btn-secondary btn-sm" style="margin-top:0.75rem;width:100%;"
+          onclick="document.getElementById('email').value='demo@datasip.ai';document.getElementById('password').value='demo1234';">
+          Fill Demo Credentials
+        </button>
+      </div>
+
+      <div style="margin-top:1.5rem;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:0.8rem;color:var(--text-muted);">Theme</span>
+        <button class="theme-toggle" id="theme-btn">☀️</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+</body>
+</html>

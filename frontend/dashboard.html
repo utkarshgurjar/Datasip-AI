@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – DataSip</title>
+  <meta name="description" content="Your DataSip learning dashboard: quiz scores, topic mastery, streak, and recent activity." />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ── Navbar ──────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="/" class="navbar-brand">
+    <div class="logo-icon">💧</div>
+    Data<span>Sip</span>
+  </a>
+  <ul class="navbar-nav">
+    <li><a href="/dashboard.html" class="active">Dashboard</a></li>
+    <li><a href="/chat.html">AI Tutor</a></li>
+    <li><a href="/quiz.html">Quizzes</a></li>
+    <li><a href="/learning-path.html">Learning Path</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <button class="theme-toggle" id="theme-btn">☀️</button>
+    <span style="font-size:0.875rem;color:var(--text-secondary);" id="navbar-user-name"></span>
+    <button class="btn btn-ghost btn-sm" data-action="logout">Sign Out</button>
+  </div>
+</nav>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <a href="/dashboard.html" class="chat-session-item active" style="margin-bottom:4px;">
+      📊 Dashboard
+    </a>
+    <a href="/chat.html" class="chat-session-item" style="margin-bottom:4px;">
+      🤖 AI Tutor Chat
+    </a>
+    <a href="/quiz.html" class="chat-session-item" style="margin-bottom:4px;">
+      📝 Quiz Generator
+    </a>
+    <a href="/learning-path.html" class="chat-session-item" style="margin-bottom:4px;">
+      🗺️ Learning Path
+    </a>
+    <div class="divider"></div>
+    <button class="btn btn-danger btn-sm" data-action="logout" style="margin-top:auto;">
+      Sign Out
+    </button>
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content">
+    <!-- Header -->
+    <div class="page-header">
+      <h1 class="page-title">Welcome back, <span style="color:var(--primary);" id="welcome-name">Learner</span>! 👋</h1>
+      <p class="page-subtitle">Here's your learning progress overview</p>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="grid grid-4" style="margin-bottom:2rem;">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(14,165,233,0.15);">📝</div>
+        <div class="stat-value" id="stat-total-quizzes">—</div>
+        <div class="stat-label">Total Quizzes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(16,185,129,0.15);">🎯</div>
+        <div class="stat-value" id="stat-avg-score">—</div>
+        <div class="stat-label">Average Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(245,158,11,0.15);">🏆</div>
+        <div class="stat-value" id="stat-best-score">—</div>
+        <div class="stat-label">Best Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(239,68,68,0.15);">🔥</div>
+        <div class="stat-value" id="stat-streak">—</div>
+        <div class="stat-label">Current Streak</div>
+      </div>
+    </div>
+
+    <!-- Secondary Stat Cards -->
+    <div class="grid grid-3" style="margin-bottom:2rem;">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:rgba(139,92,246,0.15);">💬</div>
+        <div class="stat-value" id="stat-chat-sessions">—</div>
+        <div class="stat-label">Chat Sessions</div>
+      </div>
+      <div class="stat-card" style="grid-column:span 2;">
+        <div class="card-header">
+          <span class="card-title">🗺️ Learning Path Progress</span>
+          <span id="stat-path-progress" style="font-weight:700;color:var(--primary);">—</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="path-progress-bar" style="width:0%;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:0.5rem;">
+          <span style="font-size:0.8rem;color:var(--text-muted);">Path completion</span>
+          <a href="/learning-path.html" style="font-size:0.8rem;color:var(--primary);">View Path →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-2" style="margin-bottom:2rem;">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📈 Score Trend</span>
+          <span style="font-size:0.8rem;color:var(--text-muted);">Last 20 quizzes</span>
+        </div>
+        <div style="height:220px;">
+          <canvas id="score-chart"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🧠 Topic Mastery</span>
+          <span style="font-size:0.8rem;color:var(--text-muted);">Accuracy by topic</span>
+        </div>
+        <div style="height:220px;">
+          <canvas id="mastery-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topics and Activity -->
+    <div class="grid grid-2" style="margin-bottom:2rem;">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🌟 Strongest Topics</span>
+        </div>
+        <div id="strongest-topics">
+          <div style="color:var(--text-muted);font-size:0.875rem;">Loading...</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">⚠️ Needs Improvement</span>
+          <a href="/quiz.html" style="font-size:0.8rem;color:var(--primary);">Practice →</a>
+        </div>
+        <div id="weakest-topics">
+          <div style="color:var(--text-muted);font-size:0.875rem;">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">🕐 Recent Activity</span>
+        <a href="/quiz.html" class="btn btn-primary btn-sm">New Quiz</a>
+      </div>
+      <div id="recent-activity">
+        <div style="color:var(--text-muted);">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="grid grid-3" style="margin-top:2rem;">
+      <a href="/chat.html" class="card" style="text-decoration:none;text-align:center;cursor:pointer;" id="quick-chat">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">🤖</div>
+        <h4>Chat with AI</h4>
+        <p style="font-size:0.85rem;">Ask anything, get instant explanations</p>
+      </a>
+      <a href="/quiz.html" class="card" style="text-decoration:none;text-align:center;cursor:pointer;" id="quick-quiz">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">📝</div>
+        <h4>Take a Quiz</h4>
+        <p style="font-size:0.85rem;">Test your knowledge and track progress</p>
+      </a>
+      <a href="/learning-path.html" class="card" style="text-decoration:none;text-align:center;cursor:pointer;" id="quick-path">
+        <div style="font-size:2rem;margin-bottom:0.5rem;">🗺️</div>
+        <h4>Learning Path</h4>
+        <p style="font-size:0.85rem;">Follow your personalized roadmap</p>
+      </a>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container"></div>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/auth.js"></script>
+<script src="/static/js/dashboard.js"></script>
+</body>
+</html>
