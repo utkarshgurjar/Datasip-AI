@@ -148,4 +148,4 @@ datasip/
 
 ## 📖 Swagger Docs
 
-Interactive API docs available at **http://localhost:8000/docs**
+Interactive API docs available at https://datasip-ai.onrender.com
